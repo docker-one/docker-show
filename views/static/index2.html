@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DockerShow</title>
+    <style rel="stylesheet">
+        .showMenu{
+            width: 500px;
+            height: 400px;
+            margin: auto;
+            border: 5px solid;
+            border-image: linear-gradient(45deg, gold, deeppink) 1;
+            clip-path: inset(0px round 10px);
+            animation: huerotate 6s infinite linear;
+            filter: hue-rotate(360deg);
+        }
+        @keyframes huerotate {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rorate(360deg);
+            }
+        }
+        #showMenu ul li{
+            padding: 5px;
+            list-style: none;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div class="showMenu">
+    <h1>Docker Show</h1>
+    <ul>
+        <li><a href="imagesList.html">1. imagesList</a></li>
+        <li><a href="runIngList.html">2. runingList</a></li>
+        <li><a href="showCurrentData.html">3. 查看未同步数据</a></li>
+    </ul>
+
+</div>
+
+
+</body>
+</html>

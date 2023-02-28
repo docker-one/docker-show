@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>离线数据</title>
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="data/sensor.js"></script>
+    <script type="text/javascript" src="lib/layui/layui.js"></script>
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/xadmin.css">
+    <style>
+        #showMenu {
+            width: 500px;
+            /*height: 500px;*/
+            margin: auto;
+            border: 5px solid;
+            border-image: linear-gradient(45deg, gold, deeppink) 1;
+            clip-path: inset(0px round 10px);
+            animation: huerotate 6s infinite linear;
+            filter: hue-rotate(360deg);
+        }
+
+        @keyframes huerotate {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rorate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="showMenu">
+    <h1 style="margin: auto;">&nbsp;&nbsp;&nbsp;离线显示数据设置</h1>
+    <table class="layui-table" style="margin: auto;  ">
+        <tr>
+            <td>地点</td>
+            <td><input type="text" class="layui-input" id="input_address"></td>
+        </tr>
+        <tr>
+            <td>CH4(%)</td>
+            <td><input type="text" class="layui-input" id="input_ch4"></td>
+        </tr>
+        <tr>
+            <td>CO2(%)</td>
+            <td><input type="text" class="layui-input" id="input_co2"></td>
+        </tr>
+        <tr>
+            <td>CO(ppm)</td>
+            <td><input type="text" class="layui-input" id="input_co"></td>
+        </tr>
+        <tr>
+            <td>T(℃)</td>
+            <td><input type="text" class="layui-input" id="input_t"></td>
+        </tr>
+        <tr>
+            <td>H(%)</td>
+            <td><input type="text" class="layui-input" id="input_h"></td>
+        </tr>
+        <tr>
+            <td>O2(%)</td>
+            <td><input type="text" class="layui-input" id="input_o2"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button class="layui-btn layui-btn-normal" style="float: right;" onclick="saveCurrentInfo()">保存
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        let resultData = sensorServer.getCurrentData({});
+        $("#input_address").val(resultData.address)
+        $("#input_ch4").val(resultData.CH4);
+        $("#input_co2").val(resultData.CO2);
+        $("#input_co").val(resultData.CO);
+        $("#input_t").val(resultData.T);
+        $("#input_h").val(resultData.H);
+        $("#input_o2").val(resultData.O2);
+    })
+
+    function saveCurrentInfo() {
+        var param = {};
+        param.address = $("#input_address").val();
+        param.CH4 = parseFloat($("#input_ch4").val());
+        param.CO2 = parseFloat($("#input_co2").val());
+        param.CO = parseFloat($("#input_co").val());
+        param.T = parseFloat($("#input_t").val());
+        param.H = parseFloat($("#input_h").val());
+        param.O2 = parseFloat($("#input_o2").val());
+
+        let resultData = sensorServer.saveCurrentData(param);
+        if (resultData == 1) {
+            alert("save successful!")
+        } else {
+            alert("save failed!")
+        }
+    }
+</script>
+</html>
